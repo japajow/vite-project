@@ -1019,4 +1019,58 @@ async function handleSubmitFeedback(e: FormEvent) {
 }
 ```
 
-## Criando o estado de loading 
+## Criando o estado de loading
+
+Continuando no FeedbackContentStep
+
+```tsx
+const [isSendingFeedback, setIsSendingFeedback] = useState(false);
+```
+
+Incluímos na funcao o estado de loading setIsSendingFeedback
+
+```tsx
+async function handleSubmitFeedback(e: FormEvent) {
+  e.preventDefault();
+  onFeedbackSent();
+
+  setIsSendingFeedback(true);
+
+  await api.post("/feedbacks", {
+    type: feedbackType,
+    comment,
+    screenshot,
+  });
+
+  onFeedbackSent();
+  setIsSendingFeedback(false);
+}
+```
+
+Colocamos o ternario no nosso button
+
+```tsx
+<button
+  type="submit"
+  disabled={comment.length === 0}
+  className="p-2 bg-brand-500 rounded-md border-transparent flex flex-1 justify-center items-center text-sm hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500 transition-colors disabled:opacity-50 disabled:hover:bg-brand-500"
+>
+  {isSendingFeedback ? <Loading /> : "Enviar feedback"}
+</button>
+```
+
+Desabilitamos o button quando for enviado o feedback , para nao enviar duplicado
+
+```tsx
+<button
+  type="submit"
+  disabled={comment.length === 0 || isSendingFeedback}  <<<<<<<<<<<<>>>>>>>>>>>>
+  className="p-2 bg-brand-500 rounded-md border-transparent flex flex-1 justify-center items-center text-sm hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500 transition-colors disabled:opacity-50 disabled:hover:bg-brand-500"
+>
+  {isSendingFeedback ? <Loading /> : "Enviar feedback"}
+</button>
+```
+
+## Fazendo o deploy do frontend 
+
+
