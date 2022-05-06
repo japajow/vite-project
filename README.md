@@ -1071,6 +1071,33 @@ Desabilitamos o button quando for enviado o feedback , para nao enviar duplicado
 </button>
 ```
 
-## Fazendo o deploy do frontend 
+## Fazendo o deploy do frontend No GITHUB
+
+Configurando as variáveis de ambiente
+
+Criando o arquivo .env.local
+
+```env
+VITE_API_URL=http://localhost:3333
+```
+
+agora importamos a variável env no nosso api
+
+```tsx
+import axios from "axios";
+
+export const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+});
+```
+
+Quando queremos que a variável env seja publica colocamos o VITE\_ na frente
+
+
+Acessamos o github 
+
+New repository 
+Usando o Vercel 
+
 
 
