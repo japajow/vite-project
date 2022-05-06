@@ -959,10 +959,64 @@ export function FeedbackSuccessStep({
 #NeverStopLearning
 ```
 
-## NLW Return Node.js backend Terceiro Dia 
+## NLW Return Node.js backend Terceiro Dia
 
-Setup ------- 
- npm init -y 
+Setup -------
+npm init -y
 
 https://github.com/japajow/NLW-Return-Terceiro-dia-Criando-backend
 
+## Ultimo dia NLW Return integrando com backend
+
+Usamos o axios
+
+instalando o axios
+
+npm i axios
+
+Criamos um pasta lib/api.ts
+
+```tsx
+import axios from "axios";
+
+export const api = axios.create({
+  baseURL: "http://localhost:3333",
+});
+```
+
+Agora vamos no FeedbackContentStep.tsx
+
+```tsx
+//Na funcao handleSubmitFeedback colocamos a chamada do api
+function handleSubmitFeedback(e: FormEvent) {
+  e.preventDefault();
+  onFeedbackSent();
+
+  api.post("/feedbacks", {});
+
+  onFeedbackSent();
+}
+
+// completamos o nosso api enviando no corpo dele type,comment e screenshot
+api.post("/feedbacks", {
+  type: feedbackType,
+  comment,
+  screenshot,
+});
+
+// completamos a nossa funcao usando o async await
+async function handleSubmitFeedback(e: FormEvent) {
+  e.preventDefault();
+  onFeedbackSent();
+
+  await api.post("/feedbacks", {
+    type: feedbackType,
+    comment,
+    screenshot,
+  });
+
+  onFeedbackSent();
+}
+```
+
+## Criando o estado de loading 

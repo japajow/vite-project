@@ -1,7 +1,6 @@
-import { ChatTeardropDots } from "phosphor-react";
-import { useState } from "react";
 import { Popover } from "@headlessui/react";
-import { WidgetForm } from "../WidgetForm"; 
+import { ChatTeardropDots } from "phosphor-react";
+import { WidgetForm } from "../WidgetForm";
 export const Widget = () => {
   return (
     <Popover className="absolute bottom-4 right-4 flex flex-col items-end md:bottom-10 md:right-10">
